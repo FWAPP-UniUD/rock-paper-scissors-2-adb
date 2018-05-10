@@ -29,9 +29,43 @@ class RockPaperScissors {
         const v = Math.floor(3 * Math.random());
         this.opponentChoice = this.labels[v];
     }
+    winner(myChoice) {
+        for (let i = 0; i < 3; i++) {
+            if(myChoice.value == this.labels[i])    {
+                if(this.opponentChoice == this.labels[i])  {
+                    const title3 = document.createElement('h2');
+                    title3.textContent = "Draw";
+                    this.result.append(title3);
+                }
+                else if(this.opponentChoice == this.labels[(i+1)%3])  {
+                    const title3 = document.createElement('h2');
+                    title3.textContent = "You loose";
+                    this.result.append(title3);
+                }
+                else if(this.opponentChoice == this.labels[(i-1)%3])  {
+                    const title3 = document.createElement('h2');
+                    title3.textContent = "You win!";
+                    this.result.append(title3);
+                }
+            }
+        }
+    }
     buttonPressed(event)    {
-        this.randomDraw();
-        this.result.textContent = this.opponentChoice;
-        this.mainElement.querySelector('input[name="choice"]:checked').value;
+        const myChoice = this.mainElement.querySelector('input[name="choice"]:checked');
+        if (!myChoice)  {
+            window.alert("choose one");
+        }
+        else    {
+            this.result.append(document.createElement('hr'));
+            const title1 = document.createElement('h2');
+            title1.textContent = "Your opponent played:";
+            this.result.append(title1);
+            this.result.append(document.createElement('br'));
+            this.randomDraw();
+            const title2 = document.createElement('p2');
+            title2.textContent = this.opponentChoice;
+            this.result.append(title2);
+            this.winner(myChoice);
+        }
     }
 }

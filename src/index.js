@@ -25,24 +25,24 @@ class RockPaperScissors {
         this.mainElement.append(this.result);
         containerElement.append(this.mainElement);
     }
-    randomDraw() {
+    randomDraw() {  //funzione che genera una mossa casuale dell'avversario
         const v = Math.floor(3 * Math.random());
         this.opponentChoice = this.labels[v];
     }
-    winner(myChoice) {
+    winner(myChoice) {  //funzione che verifica l'esito della partita
         for (let i = 0; i < 3; i++) {
-            if(myChoice.value == this.labels[i])    {
-                if(this.opponentChoice == this.labels[i])  {
+            if(myChoice.value == this.labels[i])    {   //trovo la posizione nel vettore della mia scelta, dopodichè sfrutta la conoscenza del vettore per capire l'esito della partita
+                if(this.opponentChoice == this.labels[i])  {    //pareggio
                     const title3 = document.createElement('h2');
                     title3.textContent = "Draw";
                     this.result.append(title3);
                 }
                 else if(this.opponentChoice == this.labels[(i+1)%3])  {
-                    const title3 = document.createElement('h2');
+                    const title3 = document.createElement('h2');    //sconfitta
                     title3.textContent = "You loose";
                     this.result.append(title3);
                 }
-                else if(this.opponentChoice == this.labels[(i-1)%3])  {
+                else if(this.opponentChoice == this.labels[(i-1)%3])  { //vittoria
                     const title3 = document.createElement('h2');
                     title3.textContent = "You win!";
                     this.result.append(title3);
@@ -51,8 +51,8 @@ class RockPaperScissors {
         }
     }
     buttonPressed(event)    {
-        const myChoice = this.mainElement.querySelector('input[name="choice"]:checked');
-        if (!myChoice)  {
+        const myChoice = this.mainElement.querySelector('input[name="choice"]:checked');    //salva in myChoice l'oggetto input selezionato
+        if (!myChoice)  {   //controlla che si sia scelto un oggetto
             window.alert("choose one");
         }
         else    {
